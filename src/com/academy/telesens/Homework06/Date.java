@@ -3,15 +3,35 @@ package com.academy.telesens.Homework06;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 
-public class Date {
+public class Date //extends java.util.Date
+        {
     private String day = "01";
     private String month = "01";
-    private String year = "2000";
+    private String year = "1997";
 
-    public String getDay() {
+
+    public Date() {
+
+    }
+
+    public Date(String day, String month, String year) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
+    public Date(Date date) {
+        this.day = date.day;
+        this.month = date.month;
+        this.year = date.year;
+    }
+
+    public String getMyDay() {
+
         return day;
     }
 
@@ -34,7 +54,8 @@ public class Date {
         return result;
     }
 
-    public String getMonth() {
+    public String getMyMonth() {
+
         return month;
     }
 
@@ -57,7 +78,8 @@ public class Date {
         return result;
     }
 
-    public String getYear() {
+    public String getMyYear() {
+
         return year;
     }
 
@@ -101,28 +123,65 @@ public class Date {
     }
 
     public static void findDifferenceBetweenDates(Date date1, Date date2) {
-        int day1 = Integer.parseInt(date1.getDay());
-        int month1 = Integer.parseInt(date1.getMonth());
-        int year1 = Integer.parseInt(date1.getYear());
+        int day1 = Integer.parseInt(date1.getMyDay());
+        int month1 = Integer.parseInt(date1.getMyMonth());
+        int year1 = Integer.parseInt(date1.getMyYear());
 
-        int day2 = Integer.parseInt(date2.getDay());
-        int month2 = Integer.parseInt(date2.getMonth());
-        int year2 = Integer.parseInt(date2.getYear());
+        int day2 = Integer.parseInt(date2.getMyDay());
+        int month2 = Integer.parseInt(date2.getMyMonth());
+        int year2 = Integer.parseInt(date2.getMyYear());
 
-        LocalDate firstDate = LocalDate.of(year1,month1,day1);
-        LocalDate secondDate = LocalDate.of(year2,month2,day2);
+        LocalDate firstDate = LocalDate.of(year1, month1, day1);
+        LocalDate secondDate = LocalDate.of(year2, month2, day2);
         Period period = Period.between(firstDate, secondDate);
-        long periodInDays= ChronoUnit.DAYS.between(firstDate, secondDate);
+        long periodInDays = ChronoUnit.DAYS.between(firstDate, secondDate);
 
         System.out.println("\nThe difference is " + period.getYears() + " years, " + period.getMonths() +
                 " months, and " + period.getDays() +
                 " days. (" + periodInDays + " days total)");
     }
 
-    public void print(){
-            System.out.printf("\nYear: %s, month: %s, day: %s", year, month, day);
+    public void print() {
+        System.out.printf("\nYear: %s, month: %s, day: %s", year, month, day);
+    }
+
+    public void getDayOfWeek() {
+        Calendar c = Calendar.getInstance();
+        c.set(Integer.parseInt(getMyYear()),Integer.parseInt(getMyMonth())-1,
+                Integer.parseInt(getMyDay()));
+        int weekDayNumber = c.get(Calendar.DAY_OF_WEEK);
+        switch (weekDayNumber){
+            case 1:
+                System.out.println("\nMonday");
+                break;
+            case 2:
+                System.out.println("\nTuesday");
+                break;
+            case 3:
+                System.out.println("\nWednesday");
+                break;
+            case 4:
+                System.out.println("\nThursday");
+                break;
+            case 5:
+                System.out.println("\nFriday");
+                break;
+            case 6:
+                System.out.println("\nSaturday");
+                break;
         }
     }
+           public int getWeekOfYear(){
+               Calendar c = Calendar.getInstance();
+               c.set(Integer.parseInt(getMyYear()),Integer.parseInt(getMyMonth())-1,
+                       Integer.parseInt(getMyDay()));
+              int weekNumber = c.get(Calendar.WEEK_OF_YEAR);
+              return weekNumber;
+
+           }
+
+
+}
 
 
 
