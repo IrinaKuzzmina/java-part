@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 
 public class Date //extends java.util.Date
-        {
+{
     private String day = "01";
     private String month = "01";
     private String year = "1997";
@@ -19,9 +20,13 @@ public class Date //extends java.util.Date
     }
 
     public Date(String day, String month, String year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        if (checkDate(day, month, year) == true) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+        } else {
+            System.out.println("You've entered wrong date");
+        }
     }
 
     public Date(Date date) {
@@ -142,15 +147,21 @@ public class Date //extends java.util.Date
     }
 
     public void print() {
-        System.out.printf("\nYear: %s, month: %s, day: %s", year, month, day);
+        System.out.println(String.format("Year: %s, month: %s, day: %s", year, month, day));
+        System.out.println();
+    }
+
+    public void printWithArguments(String year, String month, String day) {
+        System.out.println(String.format("Year: %s, month: %s, day: %s", year, month, day));
+        System.out.println();
     }
 
     public void getDayOfWeek() {
         Calendar c = Calendar.getInstance();
-        c.set(Integer.parseInt(getMyYear()),Integer.parseInt(getMyMonth())-1,
+        c.set(Integer.parseInt(getMyYear()), Integer.parseInt(getMyMonth()) - 1,
                 Integer.parseInt(getMyDay()));
         int weekDayNumber = c.get(Calendar.DAY_OF_WEEK);
-        switch (weekDayNumber){
+        switch (weekDayNumber) {
             case 1:
                 System.out.println("\nMonday");
                 break;
@@ -171,17 +182,93 @@ public class Date //extends java.util.Date
                 break;
         }
     }
-           public int getWeekOfYear(){
-               Calendar c = Calendar.getInstance();
-               c.set(Integer.parseInt(getMyYear()),Integer.parseInt(getMyMonth())-1,
-                       Integer.parseInt(getMyDay()));
-              int weekNumber = c.get(Calendar.WEEK_OF_YEAR);
-              return weekNumber;
 
-           }
+    public int getWeekOfYear() {
+        Calendar c = Calendar.getInstance();
+        c.set(Integer.parseInt(getMyYear()), Integer.parseInt(getMyMonth()) - 1,
+                Integer.parseInt(getMyDay()));
+        int weekNumber = c.get(Calendar.WEEK_OF_YEAR);
+        return weekNumber;
 
+    }
 
+    public void nextDay() {
+        int nextDay;
+        if ((Integer.parseInt(getMyDay()) + 1) <= 31) {
+            nextDay = Integer.parseInt(getMyDay()) + 1;
+        } else {
+            nextDay = 1;
+        }
+        System.out.println("Tomorrow the date will be:");
+        this.printWithArguments(this.year, this.month, Integer.toString(nextDay));
+    }
+
+    public void nextMonth() {
+        int nextMonth;
+        if ((Integer.parseInt(getMyMonth()) + 1) <= 12) {
+            nextMonth = Integer.parseInt(getMyMonth()) + 1;
+        } else {
+            nextMonth = 1;
+        }
+        System.out.println("In a month the date will be:");
+        this.printWithArguments(this.year, Integer.toString(nextMonth), this.day);
+    }
+
+    public void nextYear() {
+        int nextYear = Integer.parseInt(getMyYear()) + 1;
+        System.out.println("In a year the date will be:");
+        this.printWithArguments(Integer.toString(nextYear), this.month, this.day);
+
+    }
+
+    public void addDays(int days) {
+        int newDay;
+        if ((Integer.parseInt(getMyDay()) + days) <= 31) {
+            newDay = Integer.parseInt(getMyDay()) + days;
+            this.day = Integer.toString(newDay);
+        } else {
+            int newMonth;
+            int monthDifference = (Integer.parseInt(getMyDay()) + days) / 31;
+            newMonth = Integer.parseInt(getMyMonth()) + monthDifference;
+            if (newMonth > 12) {
+                int newYear = Integer.parseInt(getMyYear()) + (newMonth / 12);
+                this.year = Integer.toString(newYear);
+                newMonth = newMonth % 12;
+                this.month = Integer.toString(newMonth);
+            }
+            newDay = (Integer.parseInt(getMyDay()) + days) % 31;
+        }
+        this.day = Integer.toString(newDay);
+        System.out.println(String.format("In %d days the date will be:", days));
+        this.print();
+    }
+
+    @Override
+    public String toString() {
+        return "Date{" +
+                "day='" + day + '\'' +
+                ", month='" + month + '\'' +
+                ", year='" + year + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Date date = (Date) o;
+        return Objects.equals(day, date.day) &&
+                Objects.equals(month, date.month) &&
+                Objects.equals(year, date.year);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, month, year);
+    }
 }
+
+
 
 
 
