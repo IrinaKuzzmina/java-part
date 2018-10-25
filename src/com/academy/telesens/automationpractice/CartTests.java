@@ -14,7 +14,7 @@ public class CartTests {
         this.baseUrl = baseUrl;
     }
 
-    public void testAddDressToCart() {
+/*    public void testAddDressToCart() {
         beforeTest();
         System.out.println("Click more");
         EntityDress entityAdded = readCurrentEntityFromUI();
@@ -29,40 +29,40 @@ public class CartTests {
         System.out.println("Assert equals added entity and read entity");
         assert entityAdded.equals(entityFromCart);
         System.out.println("Finish 'testAddDressToCart'");
-    }
+    }*/
 
-    public void testMoreThanOneItemToCart() {
-        beforeTest();
-        System.out.println("Click more");
-        System.out.println("Please, enter the number of items you want to add to the card. NOW THE NUMBER MUST BE 3");
-        Scanner scanner = new Scanner(System.in);
-        int entitiesNumber = scanner.nextInt();
-        double sum = 0;
-        EntityDress[] addedEntities = new EntityDress[entitiesNumber];
-        for (int x = 0; x < entitiesNumber; x++) {
-            System.out.println("Click \"+ button\"");
-            addedEntities[x] = readCurrentEntityFromUI();
-            sum += addedEntities[x].getPrice();
-            System.out.println(String.format("Add entity '%s' added to cart. The number of the currently added entity is '%d'.", addedEntities[x], x + 1));
-        }
-        System.out.println("Go to cart");
-        EntityDress entityFromCart = readEntityFromCart();
-        System.out.println(String.format("Read entity '%s' from cart", entityFromCart));
-
-        System.out.println("Assert equals added entity and read entity");
-        assert addedEntities[0].equals(entityFromCart);
-
-        System.out.println("Assert equalty of the amount of added items with amount of items in the cart");
-        Cart newCart = new Cart();
-        assert addedEntities.length == readItemsNumberInCart();
-        System.out.println(String.format("The amount of added items is '%d' and the amount of items in the cart is '%d'", addedEntities.length, readItemsNumberInCart()));
-
-        System.out.println("Assert equalty of the sum of added items with sum of items in the cart");
-        assert sum == readTotalSumInCart();
-        System.out.println(String.format("The total sum of added items is '%.2f' and total sum of items in the cart is '%.2f'", sum, readTotalSumInCart()));
-
-        System.out.println("Finish 'testAddDressMoreThanOneToCart'");
-    }
+//    public void testMoreThanOneItemToCart() {
+//        beforeTest();
+//        System.out.println("Click more");
+//        System.out.println("Please, enter the number of items you want to add to the card. NOW THE NUMBER MUST BE 3");
+//        Scanner scanner = new Scanner(System.in);
+//        int entitiesNumber = scanner.nextInt();
+//        double sum = 0;
+//        EntityDress[] addedEntities = new EntityDress[entitiesNumber];
+//        for (int x = 0; x < entitiesNumber; x++) {
+//            System.out.println("Click \"+ button\"");
+//            addedEntities[x] = readCurrentEntityFromUI();
+//            sum += addedEntities[x].getPrice();
+//            System.out.println(String.format("Add entity '%s' added to cart. The number of the currently added entity is '%d'.", addedEntities[x], x + 1));
+//        }
+//        System.out.println("Go to cart");
+//        EntityDress entityFromCart = readEntityFromCart();
+//        System.out.println(String.format("Read entity '%s' from cart", entityFromCart));
+//
+//        System.out.println("Assert equals added entity and read entity");
+//        assert addedEntities[0].equals(entityFromCart);
+//
+//        System.out.println("Assert equalty of the amount of added items with amount of items in the cart");
+//        Cart newCart = new Cart();
+//        assert addedEntities.length == readItemsNumberInCart();
+//        System.out.println(String.format("The amount of added items is '%d' and the amount of items in the cart is '%d'", addedEntities.length, readItemsNumberInCart()));
+//
+//        System.out.println("Assert equalty of the sum of added items with sum of items in the cart");
+//        assert sum == readTotalSumInCart();
+//        System.out.println(String.format("The total sum of added items is '%.2f' and total sum of items in the cart is '%.2f'", sum, readTotalSumInCart()));
+//
+//        System.out.println("Finish 'testAddDressMoreThanOneToCart'");
+//    }
 
      /*public void testAddDifferentItemsToCart() {
             beforeTest();
@@ -96,6 +96,38 @@ public class CartTests {
             assert entitiesInCart.size() == addedEntities.size();
             System.out.println("Finish 'testAddDressMoreThanOneToCart'");
         }*/
+
+    public void testAddDressToCart(EntityDress addedDress, int amount) {
+        beforeTest();
+        System.out.println("Find and Click more by " + addedDress);
+//        EntityDress entityAdded = readCurrentEntityFromUI();
+
+        System.out.println(String.format("Add entity '%s', amount: %d to cart",
+                addedDress, amount));
+        System.out.println("Go to cart");
+
+        EntityDress entityFromCart = readEntityFromCart();
+        int  amountFromCart = readAmountFromCart();
+        double totalFromCart = readTotalFromCart();
+        double total = amountFromCart*addedDress.getPrice();
+        System.out.println(String.format("Read entity '%s' from cart", entityFromCart));
+
+
+        System.out.println("Assert equals added entity and read entity");
+        assert addedDress.equals(entityFromCart);
+        assert amount == amountFromCart;
+        assert total == totalFromCart;
+        System.out.println("Finish 'testAddDressToCart'");
+    }
+
+    private double readTotalFromCart() {
+        return 156.0;
+    }
+
+    private int readAmountFromCart() {
+        return 2;
+    }
+
 
 
     private EntityDress readEntityFromCart() {
