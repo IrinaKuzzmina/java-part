@@ -1,6 +1,8 @@
 package com.academy.telesens.automationpractice;
 
-import com.academy.telesens.Homework08.WeekDays;
+import com.academy.telesens.automationpractice.address.NewAddressData;
+import com.academy.telesens.automationpractice.tests.AddressTests;
+import com.academy.telesens.automationpractice.tests.CartTests;
 import com.academy.telesens.automationpractice.model.EntityDress;
 
 public class TestRunner {
@@ -9,6 +11,15 @@ public class TestRunner {
         cartTests.init("firefox", "http://automationpractice.com");
         //cartTests.testAddDressToCart();
         //cartTests.testMoreThanOneItemToCart();
+
+
+        AddressTests addressTests = new AddressTests();
+        cartTests.init("firefox", "http://automationpractice.com");
+        String line = "Kolya,Ivanov,Petrovskogo st. 35,Kharkov,Alaska,61033,United States,+3809353613437,093234567,addressAddedRef";
+        String updatedData = "Natalya,Ivanova,Pushkinskaya st. 39,Kiev,Alaska,61893,United States,+3809359013437,0932340967,addressUpdatesRef";
+        NewAddressData addressData = new NewAddressData();
+
+        addressTests.testUpdateAddress(addressData,line,updatedData );
 
 
         EntityDress entityDress1 = new EntityDress();

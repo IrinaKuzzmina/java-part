@@ -1,18 +1,11 @@
-package com.academy.telesens.automationpractice;
+package com.academy.telesens.automationpractice.tests;
 
-import com.academy.telesens.automationpractice.model.Cart;
+import com.academy.telesens.automationpractice.pages.CartPage;
 import com.academy.telesens.automationpractice.model.EntityDress;
+import com.academy.telesens.automationpractice.pages.CartPage;
 
-import java.util.Scanner;
+public class CartTests extends BaseTest {
 
-public class CartTests {
-    private String browser;
-    private String baseUrl;
-
-    public void init(String browser, String baseUrl) {
-        this.browser = browser;
-        this.baseUrl = baseUrl;
-    }
 
 /*    public void testAddDressToCart() {
         beforeTest();
@@ -150,22 +143,15 @@ public class CartTests {
         return entityAdded;
     }
 
-    public void beforeTest() {
-        System.out.println("Start 'testAddDressToCart'");
-        System.out.println(String.format("Open browser '%s'", browser));
-        System.out.println(String.format("Go to '%s'", baseUrl));
-        System.out.println("Go to 'Dresses' category");
-    }
-
     public int readItemsNumberInCart() {
-        Cart newCart = new Cart();
+        CartPage newCart = new CartPage();
         newCart.setTotalItemsAmount(3);
         int itemsNumberInCart = newCart.getTotalItemsAmount();
         return itemsNumberInCart;
     }
 
     public double readTotalSumInCart() {
-        Cart newCart = new Cart();
+        CartPage newCart = new CartPage();
         newCart.setTotalSum(78);
         double totalSumInCart = newCart.getTotalSum();
         return totalSumInCart;

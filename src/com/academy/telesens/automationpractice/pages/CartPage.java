@@ -1,10 +1,10 @@
-package com.academy.telesens.automationpractice.model;
+package com.academy.telesens.automationpractice.pages;
 
-public class Cart {
+public class CartPage {
     private int totalItemsAmount;
     private int totalSum;
 
-    public Cart(){
+    public CartPage(){
 
     }
     public int getTotalItemsAmount() {
