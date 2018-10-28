@@ -5,6 +5,11 @@ public class RoundButton extends Button {
     private int radius = 2;
 
     @Override
+    public void draw() {
+        System.out.println("RoundButton");
+    }
+
+    @Override
     public String toString() {
         return "RoundButton{" +
                 "name='" + name + '\'' +

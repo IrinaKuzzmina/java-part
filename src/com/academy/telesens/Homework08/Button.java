@@ -7,6 +7,11 @@ public class Button extends Component {
     private int height = 1;
 
     @Override
+    public void draw() {
+        System.out.println("Button");
+    }
+
+    @Override
     public String toString() {
         return "Button{" +
                 "name='" + name + '\'' +

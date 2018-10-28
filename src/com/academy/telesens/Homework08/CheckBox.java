@@ -7,6 +7,11 @@ public class CheckBox extends Button {
     boolean isChecked = false;
 
     @Override
+    public void draw() {
+        System.out.println("CheckBox");
+    }
+
+    @Override
     public String toString() {
         return "CheckBox{" +
                 "name='" + name + '\'' +

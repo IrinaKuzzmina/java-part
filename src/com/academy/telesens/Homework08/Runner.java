@@ -39,6 +39,27 @@ public class Runner {
             }
 
         }
+        Component component = new Component();
+        component.draw();
+        component = new Button();
+        component.draw();
+        component = new CheckBox();
+        component.draw();
+        component = new Label();
+        component.draw();
+        component = new RoundButton();
+        component.draw();
+
+        component = new Component();
+        component.draw3D();
+        component = new Button();
+        component.draw3D();
+        component = new CheckBox();
+        component.draw3D();
+        component = new Label();
+        component.draw3D();
+        component = new RoundButton();
+        component.draw3D();
 
     }
 }
