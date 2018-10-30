@@ -1,7 +1,8 @@
 package com.academy.telesens.automationpractice.model;
+
 import java.util.Objects;
 
-public class EntityDress {
+public class EntityDress implements Comparable<EntityDress> {
     private String model;
     private String name;
     private String size;
@@ -49,6 +50,31 @@ public class EntityDress {
         this.price = price;
     }
 
+    public EntityDress withModel(String model) {
+        this.model = model;
+        return this;
+    }
+
+    public EntityDress withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public EntityDress withSize(String size) {
+        this.size = size;
+        return this;
+    }
+
+    public EntityDress withColor(String color) {
+        this.color = color;
+        return this;
+    }
+
+    public EntityDress withPrice(double price) {
+        this.price = price;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Позиция{" +
@@ -76,4 +102,29 @@ public class EntityDress {
     public int hashCode() {
         return Objects.hash(model, name, size, color, price);
     }
+
+    /**
+     * Сравнивает этот объект 'this' со переданным 'other'.
+     * Возвращает:
+     * 0 - если объекты равны
+     * -1 - если 'this' меньше 'other'
+     * 1 - если 'this' больше 'other'
+     * Данный метод вызывается алгоритмом сортировки для упорядочивания
+     */
+    @Override
+    //public int compareTo(EntityDress other) {
+    //return Double.compare(other.price, this.price);
+    // }
+
+    //public int compareTo(EntityDress other) {
+    //return this.name.compareTo(other.name);
+    //}
+    public int compareTo(EntityDress other) {
+        int cmp = name.compareTo(other.name);
+        if (cmp == 0) {
+            cmp = Double.compare(other.price, this.price);
+        }
+        return cmp;
+    }
+
 }
